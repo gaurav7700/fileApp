@@ -1,2 +1,22 @@
-<h1>Files#new</h1>
-<p>Find me in app/views/files/new.html.erb</p>
+<div>
+  <%= form_tag "/new" do %>
+    <div>
+      <p><%= label_tag(:path, "Enter Root Directory for Search") %></p>
+      <p><%= text_field_tag(:path, nil) %></p>
+    </div>
+    <%= submit_tag "Search" %>
+  <% end %>
+</div>
+<% if @arrayFilesAll.blank? %>
+<% else %>
+  <% for index in 0..@arrayFilesAll.length-1 do %>
+    <p> <%= @path + @arrayFilesAll[index] %> </p>
+    <p><%= text_area_tag(:content, @contents[index], size: "55x5") %></p>
+    <%
+      record = Fileapp.new(name: @path+@arrayFilesAll[index], content:
+        @contents[index])
+      if record.save
+      end
+    %>
+  <% end %>
+<% end %>
